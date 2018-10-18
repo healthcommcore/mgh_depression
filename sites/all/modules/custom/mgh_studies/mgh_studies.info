@@ -1,0 +1,5 @@
+name = MGH DCRP Studies
+description = Adds studies taxonomy term to studies listing
+dependencies[] = views
+package = Custom
+core = 7.x

@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Install db schema for MGH quotes
+ */
+
+/**
+ * Implements hook_schema
+ */
+function mgh_quotes_schema() {
+  $schema['mgh_quotes'] = array(
+    'description' => 'Stores data pertaining to MGH quotes module',
+	'fields' => array(
+	  'qid' => array(
+	    'type' => 'serial',
+		'unsigned' => TRUE,
+		'not null' => TRUE,
+		'description' => 'The blocks id',
+	  ),
+	  'info' => array(
+	    'type' => 'varchar',
+		'length' => 128,
+		'not null' => TRUE,
+		'default' => "",
+		'description' => 'Name of page where quote will appear',
+	  ),
+	  'quote_body' => array(
+	    'type' => 'varchar',
+		'length' => 255,
+		'not null' => TRUE,
+		'default' => "",
+		'description' => 'The quote wording',
+	  ),
+	  'quote_author' => array(
+	    'type' => 'varchar',
+		'length' => 128,
+		'not null' => TRUE,
+		'default' => "",
+		'description' => 'Name of quote author',
+	  ),
+	  'quote_creds' => array(
+	    'type' => 'varchar',
+		'length' => 255,
+		'not null' => TRUE,
+		'default' => "",
+		'description' => 'Quote author credentials',
+	  ),
+	),
+	'primary key' => array('qid'),
+  );
+  return $schema;
+}
+    
+    

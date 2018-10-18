@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Allows view to display study category
+ */
+
+/**
+ * Implements hook_views_query_alter()
+ */
+function mgh_studies_views_query_alter(&$view, &$query) {
+	//dpm($view);
+}
+

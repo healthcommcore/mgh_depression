@@ -1,0 +1,6 @@
+name = MGH Quotes
+description = Facilitates creation of quotes for MGH Depression website
+package = custom
+core = 7.x
+
+dependencies[] = block

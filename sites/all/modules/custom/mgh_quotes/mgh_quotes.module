@@ -1,0 +1,71 @@
+<?php
+/**
+ * @file
+ * A block module to facilitate creation of quotes for MGH Depression website
+ */
+
+ /**
+  * Implements hook_block_info()
+  */
+function mgh_quotes_block_info() {
+  $blocks['mgh_quotes'] = array(
+    'info' => t('MGH Depression Quote'),
+	'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_configure
+ */
+function mgh_quotes_block_configure($delta = '') {
+  $form = array();
+  switch($delta) {
+    case 'mgh_quotes' :
+	  $form['info'] = array(
+	    '#type' => 'textfield',
+		'#title' => t('Page name'),
+		'#description' => t('Name of the page where the quote will appear'),
+		'#weight' => -18,
+	  );
+	  $form['quote_body'] = array(
+	    '#type' => 'text_format',
+		'#title' => t('Quote text'),
+		'#description' => t('The quote wording'),
+		'#required' => TRUE,
+		'#weight' => -17,
+	  );
+	  $form['quote_name'] = array(
+	    '#type' => 'textfield',
+		'#title' => t('Quote author'),
+		'#description' => t('Enter the author of the quote'),
+		'#weight' => -16,
+	  );
+	  $form['quote_creds'] = array(
+	    '#type' => 'text_format',
+		'#title' => t('Author credentials'),
+		'#description' => t("Enter the author's credentials"),
+		'#weight' => -15,
+	  );
+	  break;
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_block_save()
+ */
+function mgh_quote_block_save($delta = '', $edit = array()) {
+  switch($delta) {
+    case 'mgh_quotes' :
+      db_update('mgh_quote')->fields( array(
+        'info' => $edit['info'],
+        'quote_body' => $edit['quote_body'],
+        'quote_author' => $edit['quote_author'],
+        'quote_creds' => $edit['quote_creds'],
+      ))
+      ->condition('qid', $delta)
+      ->execute();
+  }
+  return TRUE;
+}
